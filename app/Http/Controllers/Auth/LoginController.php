@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
+
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+    
     public function login(LoginRequest $request)
     {
         $credentials = $request->validated();
@@ -28,7 +34,7 @@ class LoginController extends Controller
         }
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('dashboard');
+            return redirect()->route('user.dashboard');
         }
 
         return back()->withErrors(['email' => 'Credenciales incorrectas']);
