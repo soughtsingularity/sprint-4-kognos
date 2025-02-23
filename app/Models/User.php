@@ -11,7 +11,9 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 class User extends Authenticatable
 {
     use HasFactory;
-
+    
+    protected $keyType = 'string';
+    public $incrementing = false;
     protected $fillable = ['name', 'email', 'password', 'role'];
     protected $hidden = ['password', 'remember_token'];
     protected $casts = ['password' => 'hashed'];
