@@ -26,4 +26,11 @@ class User extends Authenticatable
             $user->id = (string) \Illuminate\Support\Str::uuid();
         });
     }
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'course_user')
+            ->withPivot('progress', 'medal')
+            ->withTimestamps();
+    }
 }
