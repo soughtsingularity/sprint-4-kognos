@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UserLoginRequest;
 
 class LoginController extends Controller
 {
@@ -16,7 +16,7 @@ class LoginController extends Controller
         return view('auth.login');
     }
     
-    public function login(LoginRequest $request)
+    public function login(UserLoginRequest $request)
     {
         $credentials = $request->validated();
 
@@ -33,11 +33,18 @@ class LoginController extends Controller
             }
         }
 
-        if (Auth::attempt($credentials)) {
+        if(Auth::attempt($credentials)){    
+            $user = Auth::user();       
+
+            if($user->role === 'admin'){
+                return redirect()->route('admin.courses.index');
+            }
+
             return redirect()->route('user.dashboard');
         }
 
-        return back()->withErrors(['email' => 'Credenciales incorrectas']);
+        return back()->withErrors([
+            'credentials' => 'Credenciales incorrectas'])->withInput();
     }
 
     public function logout()
