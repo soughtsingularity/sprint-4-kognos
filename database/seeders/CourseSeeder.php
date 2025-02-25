@@ -26,33 +26,33 @@ class CourseSeeder extends Seeder
                     'Chapter' => 2,
                     'title' => 'Bases de datos',
                     'videos' => [
-                        ['title' => 'Diseño de Bases de datos', 'url' => 'https://www.youtube.com/watch?v=HXE169-n5pM&t=17555s&pp=ygUYam9ubWlyY2hhIGJhc2VzIGRlIGRhdG9z'],
-                        ['title' => 'Modelado de Bases de datos', 'url' => 'https://www.youtube.com/watch?v=aFgHVE_Y_YU&t=41s&pp=ygUYam9ubWlyY2hhIGJhc2VzIGRlIGRhdG9z'],
-                        ['title' => 'Introduccion a SQL', 'url' => 'https://www.youtube.com/watch?v=UAuZvxPTi58&pp=ygUYam9ubWlyY2hhIGJhc2VzIGRlIGRhdG9z'],
-                        ['title' => 'Introducción a NoSQL', 'url' => 'https://www.youtube.com/watch?v=3MWt3CCjHG8&t=7548s&pp=ygUYam9ubWlyY2hhIGJhc2VzIGRlIGRhdG9z'],
-                        ['title' => 'Curso MySQL', 'url' => 'https://www.youtube.com/watch?v=OuJerKzV5T0&t=32s&pp=ygUObW91cmVkZXYgbXlzcWw%3D'],
-                        ['title' => 'Curso MongoDB', 'url' => 'https://www.youtube.com/watch?v=DPdAfgmkNuE&t=1855s'],
+                        ['title' => 'Diseño de Bases de datos', 'url' => 'https://www.youtube.com/embed/HXE169-n5pM'],
+                        ['title' => 'Modelado de Bases de datos', 'url' => 'https://www.youtube.com/embed/aFgHVE_Y_YU'],
+                        ['title' => 'Introduccion a SQL', 'url' => 'https://www.youtube.com/embed/UAuZvxPTi58&pp'],
+                        ['title' => 'Introducción a NoSQL', 'url' => 'https://www.youtube.com/embed/3MWt3CCjHG8&t'],
+                        ['title' => 'Curso MySQL', 'url' => 'https://www.youtube.com/embed/OuJerKzV5T0&t'],
+                        ['title' => 'Curso MongoDB', 'url' => 'https://www.youtube.com/embed/DPdAfgmkNuE&t'],
                     ]
                 ],
                 [
                     'Chapter' => 3,
                     'title' => 'Introducción a Laravel',
                     'videos' => [
-                        ['title' => 'Introducción a Laravel', 'url' => 'https://www.youtube.com/watch?v=laXc22YPGhg&list=PLZ2ovOgdI-kVtF2yQ2kiZetWWTmOQoUSG'],
-                        ['title' => 'Testing con Laravel', 'url' => 'https://www.youtube.com/watch?v=BuDger5Ytbc&list=PLdXLsjL7A9k0esh2qNCtUMsGPLUWdLjHp'],
-                        ['title' => 'Laravel con Docker', 'url' => 'https://www.youtube.com/playlist?list=PL8GYrmS0JFOTD5-il4O-2J8_GuucSYaQo'],
-                        ['title' => 'LiveWire', 'url' => 'https://www.youtube.com/watch?v=ZRGCWjPkN68&list=PLLtGuz4yR5Fj_8Ri94Jk1mBo9Alsyv8kB'],
-                        ['title' => 'API Rest Laravel con TDD', 'url' => 'https://www.youtube.com/watch?v=MbHgmZV_BUc&list=PL8GYrmS0JFORQ8PRPuaIQ769aDWVkrnjj3']
+                        ['title' => 'Introducción a Laravel', 'url' => 'https://www.youtube.com/embed/laXc22YPGhg'],
+                        ['title' => 'Testing con Laravel', 'url' => 'https://www.youtube.com/embed/BuDger5Ytbc'],
+                        ['title' => 'Laravel con Docker', 'url' => 'https://www.youtube.com/embed/videoseries?list=PL8GYrmS0JFOTD5-il4O-2J8_GuucSYaQo'],
+                        ['title' => 'LiveWire', 'url' => 'https://www.youtube.com/embed/ZRGCWjPkN68'],
+                        ['title' => 'API Rest Laravel con TDD', 'url' => 'https://www.youtube.com/embed/MbHgmZV_BUc']
                     ]
                 ],
                 [
                     'Chapter' => 4,
                     'title' => 'Proyectos con Laravel',
                     'videos' => [
-                        ['title' => 'CRUD con Laravel', 'url' => 'https://www.youtube.com/watch?v=inVNnyFW2aM&list=PLoRfWwOOv4jytDCGQuOyNJeFkwoddMap5'],
-                        ['title' => 'REST API Crud', 'url' => 'https://www.youtube.com/watch?v=eLI8c_NtkBk&t=54s&pp=ygUNY3J1ZCBsYXJhdmVsIA%3D%3D'],
-                        ['title' => 'E-Commerce', 'url' => 'https://www.youtube.com/watch?v=7v5NJS_VNQc&list=PLz_YkiqIHestjKNf-U5QljoulWcYyZsR1'],
-                        ['title' => 'DOble CRUD con Vue e Inertia', 'url' => 'https://www.youtube.com/watch?v=aaR9JNkFcnc'],
+                        ['title' => 'CRUD con Laravel', 'url' => 'https://www.youtube.com/embed/inVNnyFW2aM'],
+                        ['title' => 'REST API Crud', 'url' => 'https://www.youtube.com/embed/eLI8c_NtkBk'],
+                        ['title' => 'E-Commerce', 'url' => 'https://www.youtube.com/embed/7v5NJS_VNQc'],
+                        ['title' => 'DOble CRUD con Vue e Inertia', 'url' => 'https://www.youtube.com/embed/aaR9JNkFcnc'],
                     ]
                 ]
 

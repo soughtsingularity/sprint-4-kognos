@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCourseRequest;
 
@@ -11,11 +12,46 @@ class CourseController extends Controller
 
     public function index()
     {
-        $courses = Course::all();
-        return view('admin.courses.index', compact('courses'));
+        $user = Auth::user();
+        $isAdmin = $user->role === 'admin'; 
+        $courses = Course::all(); 
+    
+        return view('courses.index', compact('courses', 'isAdmin'));
+    }
+    
+
+    # User Actions
+    public function enroll(Course $course)
+    {
+        $user = Auth::user();
+
+        if ($user->role === 'admin') {
+            return back()->with('error', 'Los administradores no pueden inscribirse en cursos.');
+        }        
+
+        if(!$user->courses()->where('course_id', $course->id)->exists()){
+            $user->courses()->attach($course->id, ['progress' =>0 , 'medal'=> 'none']);
+            return back()->with('succes', 'Te has apuntado al curso');
+        }
+
+        return back()->with('error', 'Ya estás apuntado en el curso');
     }
 
+    public function unenroll(Course $course)
+    {
+        $user = Auth::user();
 
+        if($user->courses()->where('course_id', $course->id)->exists()){
+            $user->courses()->detach($course->id);
+            return back()->with('succes', 'Te has desapuntado del curso');
+        }
+
+        return back()->with('error', 'NO estabas inscrito en este curso');
+
+
+    }
+
+    # Admin Actions
     public function create()
     {
         return view('admin.courses.create');

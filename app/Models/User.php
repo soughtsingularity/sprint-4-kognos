@@ -27,10 +27,16 @@ class User extends Authenticatable
         });
     }
 
-    public function courses()
-    {
-        return $this->belongsToMany(Course::class, 'course_user')
-            ->withPivot('progress', 'medal')
-            ->withTimestamps();
-    }
-}
+        /**
+     * Relación muchos a muchos con cursos.
+     *
+     * @return BelongsToMany
+     */
+
+     public function courses()
+     {
+         return $this->belongsToMany(Course::class, 'course_user')
+             ->withPivot('progress', 'medal')
+             ->withTimestamps();
+     }
+ }

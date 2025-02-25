@@ -19,12 +19,12 @@
 
         <form method="POST" action="{{ROUTE('admin.courses.chapter.complete', [$course, $chapterIndex])}}" class="mt-4">
             @csrf
-            <input type="chebox" id="completed" name="completed" required>
+            <input type="checkbox" id="completed" name="completed" required>
             <label for="completed" class="bg-green-500 text-white px-4 py-2">Marcar como completado</label>
             <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded ml-4">Completar</button>
         </form>
 
-        <div class="mt-6 flex justofy-between">
+        <div class="mt-6 flex justify-between">
             @if($chapterIndex > 0)
                 <a href="{{route('admin.courses.chapter', [$course, $chapterIndex - 1])}}" class="bg-gray-500 text-white px-4 py-2 rounded">Capítulo anterior</a>
             @endif
