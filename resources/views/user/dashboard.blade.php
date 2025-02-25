@@ -4,6 +4,7 @@
 
 @section('content')
 <div class="container mx-auto p-4">
+    <a href="{{route('courses.index')}}">Cursos</a>
     <h1 class="text-2xl font-bold mb-4 text-gray-200">{{$user->name}}</h1>
     <form action="{{route('delete-account')}}" method="POST">
         @csrf
@@ -39,11 +40,11 @@
                             @endif
                         </td>
                         <td class="px-4 py-2 border flex space-x-2">
-                            <a href="{{ route('courses.show', $course) }}" class="bg-blue-500 text-white px-3 py-1 rounded">Ver</a>
+                            {{---<a href="{{ route('courses.show', $course) }}" class="bg-blue-500 text-white px-3 py-1 rounded">Ver</a>---}}
                             <form action="{{ route('courses.unenroll', $course) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded">Salir</button>
+                                <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded">Abandonar el curso</button>
                             </form>
                         </td>
                     </tr>

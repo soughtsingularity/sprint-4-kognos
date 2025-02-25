@@ -34,6 +34,13 @@ class Course extends Model
         return is_array($chapters) ? $chapters : [];
     }
 
+
+        /**
+     * Relación muchos a muchos con usuarios.
+     *
+     * @return BelongsToMany
+     */
+
     public function users()
     {
         return $this->belongsToMany(User::class, 'course_user')

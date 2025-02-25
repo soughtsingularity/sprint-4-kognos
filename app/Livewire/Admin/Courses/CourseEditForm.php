@@ -4,13 +4,21 @@ namespace App\Livewire\Admin\Courses;
 
 use Livewire\Component;
 use App\Models\Course;
-use App\Http\Requests\StoreCourseRequest;
 
-class CourseCreateForm extends Component
+class CourseEditForm extends Component
 {
+    public $course;
     public $title;
     public $description;
     public $content = [];
+
+    public function mount($courseId)
+    {
+        $this->course = Course::findOrFail($courseId); // Buscar el curso por ID
+        $this->title = $this->course->title;
+        $this->description = $this->course->description;
+        $this->content = json_decode($this->course->content, true);
+    }
 
     public function addChapter()
     {
@@ -41,7 +49,7 @@ class CourseCreateForm extends Component
     private function convertYoutubeUrl($url)
     {
         $pattern = '/(?:youtube\\.com\\/.*(?:\\?|&)v=|youtu\\.be\\/)([a-zA-Z0-9_-]+)/';
-    
+        
         if (preg_match($pattern, $url, $matches)) {
             return 'https://www.youtube.com/embed/' . $matches[1];
         }
@@ -52,8 +60,8 @@ class CourseCreateForm extends Component
     
         return $url;
     }
-    
-    public function save()
+
+    public function update()
     {
         $validatedData = $this->validate([
             'title' => 'required|string|min:5|max:255',
@@ -64,24 +72,23 @@ class CourseCreateForm extends Component
             'content.*.videos.*.title' => 'required|string|min:5|max:255',
             'content.*.videos.*.url' => 'required|url',
         ]);
-    
+
         foreach ($validatedData['content'] as &$chapter) {
             foreach ($chapter['videos'] as &$video) {
                 $video['url'] = $this->convertYoutubeUrl($video['url']);
             }
         }
-    
-        Course::create([
-            'title' => $validatedData['title'],
-            'description' => $validatedData['description'],
-            'content' => json_encode($validatedData['content']) 
+
+        $this->course->update([
+            'title' => $this->title,
+            'description' => $this->description,
+            'content' => json_encode($this->content),
         ]);
-
-        return redirect()->route('admin.courses.index')->with('succes', 'Curso creado con éxito');
+        
+        return redirect()->route('admin.courses.index')->with('success', 'Curso actualizado correctamente');
     }
-
     public function render()
     {
-        return view('livewire.admin.courses.course-create-form');
+        return view('livewire.admin.courses.course-edit-form');
     }
 }
