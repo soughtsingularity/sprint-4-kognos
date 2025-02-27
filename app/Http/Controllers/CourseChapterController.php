@@ -9,10 +9,6 @@ use App\Http\Requests\CompleteChapterRequest;
 
 class CourseChapterController extends Controller
 {
-    public function start(Course $course)
-    {
-        return redirect()->route('admin.courses.chapter', [$course, 0]);
-    }
 
     public function show(Course $course, $chapterIndex)
     {
@@ -21,6 +17,7 @@ class CourseChapterController extends Controller
         $chapters = $course->getChapters();
         $totalChapters = count($chapters);
         $user = auth()->user();
+        $isAdmin = $user->role === 'admin'; 
 
         $userProgress = 100;
 
@@ -35,12 +32,12 @@ class CourseChapterController extends Controller
                 $requiredProgress = ($chapterIndex / $totalChapters) * 100;
                 
             if ($userProgress < $requiredProgress) {
-                return redirect()->route('admin.courses.chapter', [$course, max(0, $chapterIndex -1)])
+                return redirect()->route('courses.chapter', [$course, max(0, $chapterIndex -1)])
                     ->with('error', 'Debes completar el capítulo antes de continuar');
             }
         }
 
-        return view('admin.courses.chapter', compact('course', 'chapters', 'chapterIndex', 'totalChapters', 'userProgress'));
+        return view('courses.chapter', compact('course', 'isAdmin', 'chapterIndex'));
     }
 
     public function completeChapter(CompleteChapterRequest $request, Course $course, $chapterIndex)
@@ -54,7 +51,7 @@ class CourseChapterController extends Controller
             'progress' => $newProgress
         ]);
 
-        return redirect()->route('admin.courses.chapter', [$course, $chapterIndex + 1])
+        return redirect()->route('courses.chapter', [$course, $chapterIndex + 1])
             ->with('success', 'Capítulo completado');
     }
 }

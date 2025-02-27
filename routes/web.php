@@ -28,15 +28,16 @@ Route::middleware(['web'])->group(function(){
         Route::post('/courses/{course}/enroll', [CourseController::class, 'enroll'])->name('courses.enroll');
         Route::delete('/courses/{course}/unenroll', [CourseController::class, 'unenroll'])->name('courses.unenroll');
         Route::delete('/delete-account', [UserController::class, 'deleteOwnAccount'])->name('delete-account');
-        Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
 
         # Admin Actions
         Route::prefix('admin')->name('admin.')->group(function () {
-            Route::get('/courses/{course}/start', [CourseChapterController::class, 'start'])->name('courses.start');
-            Route::get('/courses/{course}/chapter/{chapterIndex}', [CourseChapterController::class, 'show'])->name('courses.chapter');
-            Route::post('/courses/{course}/chapter/{chapterIndex}/complete', [CourseChapterController::class, 'completeChapter'])->name('courses.chapter.complete');
             Route::resource('users', UserController::class);
             Route::resource('courses', CourseController::class);
         });
+
+        #Users & admin Actions
+        Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+        Route::get('/courses/{course}/chapter/{chapterIndex}', [CourseChapterController::class, 'show'])->name('courses.chapter');
+        Route::post('/courses/{course}/chapter/{chapterIndex}/complete', [CourseChapterController::class, 'completeChapter'])->name('courses.chapter.complete');
     });
 });

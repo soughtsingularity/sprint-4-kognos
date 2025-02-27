@@ -20,7 +20,7 @@
             @foreach($courses as $course)
                 <tr class="border">
                     <td class="px-4 py-2">
-                        <a href="{{ route('admin.courses.start', $course->id) }}" class="text-blue-600 hover:underline">
+                        <a href="{{ route('courses.chapter', [$course, 0]) }}" class="text-blue-600 hover:underline">
                             {{ $course->title }}
                         </a>
                     </td>             
