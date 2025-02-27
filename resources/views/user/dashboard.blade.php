@@ -40,7 +40,7 @@
                             @endif
                         </td>
                         <td class="px-4 py-2 border flex space-x-2">
-                            {{---<a href="{{ route('courses.show', $course) }}" class="bg-blue-500 text-white px-3 py-1 rounded">Ver</a>---}}
+                            <a href="{{ route('courses.chapter', [$course, 0]) }}" class="bg-blue-500 text-white px-3 py-1 rounded">Ver</a>
                             <form action="{{ route('courses.unenroll', $course) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')

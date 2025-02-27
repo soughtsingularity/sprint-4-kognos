@@ -46,7 +46,7 @@ class CourseController extends Controller
             return back()->with('succes', 'Te has desapuntado del curso');
         }
 
-        return back()->with('error', 'NO estabas inscrito en este curso');
+        return back()->with('error', 'No estabas inscrito en este curso');
 
 
     }
