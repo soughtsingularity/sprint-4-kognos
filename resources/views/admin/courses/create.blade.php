@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.nav')
 
 @section('title', 'Crear curso')
 
@@ -7,7 +7,5 @@
     <h1 class="text-2xl font-bold mb-4">Crear nuevo curso</h1>
 
     @livewire('admin.courses.course-create-form')
-
-    <a href="{{route('admin.courses.index')}}" class="text-blue-500 mt-4 inline-block" >Cursos</a>
 </div>
 @endsection

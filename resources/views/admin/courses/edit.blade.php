@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.nav')
 
 @section('title', 'Editar Curso')
 
@@ -9,7 +9,5 @@
 
 @livewire('admin.courses.course-edit-form', ['courseId' => $course->id])
 
-    <a href="{{route('courses.index')}} class
-    text-blue-500 mt-4 inline-block">Cursos</a>
 </div>
 @endsection

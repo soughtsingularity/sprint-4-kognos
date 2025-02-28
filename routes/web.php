@@ -10,9 +10,8 @@ use App\Http\Controllers\CourseChapterController;
 
 Route::middleware(['web'])->group(function(){
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    Route::get('/', [CourseController::class, 'index'])->name('courses.index');
+    Route::get('/courses/{course}/chapter/{chapterIndex}', [CourseChapterController::class, 'show'])->name('courses.chapter');
     
     # Login & Register
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -36,8 +35,7 @@ Route::middleware(['web'])->group(function(){
         });
 
         #Users & admin Actions
-        Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
-        Route::get('/courses/{course}/chapter/{chapterIndex}', [CourseChapterController::class, 'show'])->name('courses.chapter');
+        
         Route::post('/courses/{course}/chapter/{chapterIndex}/complete', [CourseChapterController::class, 'completeChapter'])->name('courses.chapter.complete');
     });
 });

@@ -1,18 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.nav')
 
 @section('title', 'Mi Panel')
 
 @section('content')
 <div class="container mx-auto p-4">
-    <a href="{{route('courses.index')}}">Cursos</a>
-    <h1 class="text-2xl font-bold mb-4 text-gray-200">{{$user->name}}</h1>
-    <form action="{{route('delete-account')}}" method="POST">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded mt-4">Eliminar cuenta</button>
-    </form>
+    <h1 class="text-2xl font-bold mb-4 text-black">Bienvenido {{$user->name}}</h1>
     @if ($courses->isEmpty())
-        <p class="text-gray-200">No estás inscrito en ningún curso aún.</p>
+        <p class="text-black font-bold mb-6">No estás inscrito en ningún curso aún.</p>
+        <a href="{{route('courses.index')}}" class="bg-blue-500 rounded py-2 px-4 mt-6">Buscar cursos</a>
     @else
         <table class="table-auto w-full mt-4 border-collapse border border-gray-300">
             <thead class="text-xs text-gray-700 uppercase bg-gray-200">

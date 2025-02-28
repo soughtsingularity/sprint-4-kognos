@@ -17,11 +17,10 @@ class CourseChapterController extends Controller
         $chapters = $course->getChapters();
         $totalChapters = count($chapters);
         $user = auth()->user();
-        $isAdmin = $user->role === 'admin'; 
 
         $userProgress = 100;
 
-        if($user->role !== 'admin'){
+        if($user && $user->role !== 'admin'){
 
                 $userProgress = $user->courses()
                 ->where('course_id', $course->id)
@@ -37,7 +36,7 @@ class CourseChapterController extends Controller
             }
         }
 
-        return view('courses.chapter', compact('course', 'isAdmin', 'chapterIndex'));
+        return view('courses.chapter', compact('course','chapterIndex'));
     }
 
     public function completeChapter(CompleteChapterRequest $request, Course $course, $chapterIndex)
