@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.nav')
 
 @section('title', 'Editar usuario')
 
@@ -31,8 +31,6 @@
 
         <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded mt-4 w-full">Actualizar Usuario</button>
     </form>
-
-    <a href="{{ route('admin.users.index') }}" class="text-blue-500 mt-4 inline-block">Usuarios</a>
 </div>
 @endsection
 

@@ -6,6 +6,7 @@ use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {

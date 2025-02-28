@@ -13,10 +13,9 @@ class CourseController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $isAdmin = $user->role === 'admin'; 
         $courses = Course::all(); 
     
-        return view('courses.index', compact('courses', 'isAdmin'));
+        return view('courses.index', compact('courses'));
     }
     
 

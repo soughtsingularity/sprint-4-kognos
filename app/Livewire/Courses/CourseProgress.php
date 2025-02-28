@@ -13,20 +13,22 @@ class CourseProgress extends Component
     public $progress = 0;
     public $completedChapters = [];
     public $currentChapterIndex = 0;
-    public $isAdmin;
 
-    public function mount(Course $course, $isAdmin)
+    public function mount(Course $course)
     {
         $this->course = $course;
         $this->chapters = $course->getChapters(); 
         $this->completedChapters = $this->loadCompletedChapters();
         $this->progress = $this->calculateProgress();
         $this->currentChapterIndex = 0; 
-        $this->isAdmin = $isAdmin;
     }
     
     private function loadCompletedChapters()
     {
+        if(!Auth::check()){
+            return [];
+        }
+
         $progressPercent = Auth::user()->courses()
             ->where('course_id', $this->course->id)
             ->first()
@@ -50,6 +52,10 @@ class CourseProgress extends Component
     
     public function markChapterComplete()
     {
+        if(!Auth::check()){
+            return;
+        }
+
         if (!in_array($this->currentChapterIndex, $this->completedChapters)) {
             $this->completedChapters[] = $this->currentChapterIndex;
         }
@@ -76,6 +82,10 @@ class CourseProgress extends Component
     
     public function completeCourse()
     {
+        if(!Auth::check()){
+            return;
+        }
+
         $this->progress = 100;
         $this->completedChapters = range(0, count($this->chapters) - 1);
     
@@ -85,6 +95,10 @@ class CourseProgress extends Component
 
     private function assignMedal()
     {
+        if(!Auth::check()){
+            return;
+        }
+
         $medal = 'none';
 
         if ($this->progress >= 100) {
