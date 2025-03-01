@@ -6,6 +6,7 @@ use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -29,12 +30,7 @@ class UserController extends Controller
             'role' => $request->role
         ]);
 
-        return redirect()->route('admin.users.index')->with('success', 'Usuario creado correctamente');
-    }
-
-    public function show(User $user)
-    {
-        //
+        return redirect()->route('users.index')->with('success', 'Usuario creado correctamente');
     }
 
     public function edit(User $user)
@@ -52,14 +48,14 @@ class UserController extends Controller
     
         $user->update($data);
     
-        return redirect()->route('admin.users.index')->with('success', 'Usuario actualizado.');
+        return redirect()->route('users.index')->with('success', 'Usuario actualizado.');
     }
     
 
     public function destroy(User $user) 
     {
         $user->delete();
-        return redirect()->route('admin.users.index')->with('success', 'Usuario eliminado.');
+        return redirect()->route('users.index')->with('success', 'Usuario eliminado.');
     }
     
     public function deleteOwnAccount() 

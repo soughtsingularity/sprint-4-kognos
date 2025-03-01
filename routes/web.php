@@ -7,13 +7,14 @@ use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CourseChapterController;
+use App\Livewire\Courses\CourseProgress;
 
 Route::middleware(['web'])->group(function(){
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    Route::get('/', [CourseController::class, 'index'])->name('courses.index');
+    Route::get('/courses/{course}/chapter/{chapterIndex}', [CourseChapterController::class, 'show'])->name('courses.chapter');
     
+    # Login & Register
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -21,31 +22,20 @@ Route::middleware(['web'])->group(function(){
     Route::post('/register', [RegisterController::class, 'register']);
     
     Route::middleware(['auth'])->group(function () {
-        Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
 
-        Route::delete('/courses/{id}/unenroll', [UserDashboardController::class, 'unenroll'])->name('courses.unenroll');
-
-        Route::prefix('admin')->name('admin.')->group(function () {
-
-            Route::get('/courses/{course}/start', [CourseChapterController::class, 'start'])
-            ->name('courses.start');
-            Route::get('/courses/{course}/chapter/{chapterIndex}',
-                [CourseChapterController::class, 'show'])
-                ->name('courses.chapter');
-            Route::post('/courses/{course}/chapter/{chapterIndex}/complete',
-                [CourseChapterController::class, 'completeChapter'])
-                ->name('courses.chapter.complete');
-                Route::resource('users', UserController::class);
-                Route::resource('courses', CourseController::class);
-            
-        });
+        # Auth User Actions
+        Route::get('/dashboard/{user}', [UserDashboardController::class, 'index'])->name('user.dashboard');
+        Route::post('/courses/{course}/enroll', [CourseController::class, 'enroll'])->name('courses.enroll');
+        Route::delete('/courses/{course}/unenroll', [CourseController::class, 'unenroll'])->name('courses.unenroll');
         Route::delete('/delete-account', [UserController::class, 'deleteOwnAccount'])->name('delete-account');
-        
+        Route::resource('users', UserController::class);
 
+        # Admin Actions
+        Route::prefix('admin')->name('admin.')->group(function () {
+            Route::resource('courses', CourseController::class);
+        });
+
+        #Users & admin Actions
+        Route::post('/courses/{course}/chapter/{chapterIndex}/complete', [CourseProgress::class, 'completeChapter'])->name('courses.chapter.complete');
     });
 });
-
-
-
-
-

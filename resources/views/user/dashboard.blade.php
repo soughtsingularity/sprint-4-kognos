@@ -1,55 +1,89 @@
-@extends('layouts.app')
+@extends('layouts.nav')
 
 @section('title', 'Mi Panel')
 
 @section('content')
-<div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4 text-gray-200">{{$user->name}}</h1>
-    <form action="{{route('delete-account')}}" method="POST">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded mt-4">Eliminar cuenta</button>
-    </form>
-    @if ($courses->isEmpty())
-        <p class="text-gray-200">No estás inscrito en ningún curso aún.</p>
+
+<div class="max-w-3xl mx-auto bg-gray-800 border border-gray-700 rounded-lg shadow-lg p-6 text-white">
+
+    @if(Auth::check() && Auth::user()->id === $user->id)
+        <!-- Si el usuario autenticado está viendo su propio dashboard -->
+        <h1 class="text-3xl font-bold text-center font-mono mb-6">
+            Bienvenido, {{ $user->name }}
+        </h1>
+        
+        @if ($courses->isEmpty())
+            <p class="text-gray-400 font-semibold text-center">No estás inscrito en ningún curso aún.</p>
+            <div class="flex justify-center mt-6">
+                <a href="{{ route('courses.index') }}" class="bg-[var(--primary-color)] text-white px-6 py-3 rounded-lg hover:bg-red-700 transition">
+                    Buscar Cursos
+                </a>
+            </div>
+        @else
+            <h2 class="text-xl font-bold mb-4">Mis Cursos</h2>
+        @endif
+
     @else
-        <table class="table-auto w-full mt-4 border-collapse border border-gray-300">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-200">
-                <tr>
-                    <th class="px-4 py-2 border">Curso</th>
-                    <th class="px-4 py-2 border">Progreso</th>
-                    <th class="px-4 py-2 border">Medalla</th>
-                    <th class="px-4 py-2 border">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($courses as $course)
-                    <tr class="border">
-                        <td class="px-4 py-2 border">{{ $course->title }}</td>
-                        <td class="px-4 py-2 border">{{ $course->pivot->progress }}%</td>
-                        <td class="px-4 py-2 border">
-                            @if ($course->pivot->medal == 'gold')
-                                <span class="text-yellow-500 font-bold">🏅 Oro</span>
-                            @elseif ($course->pivot->medal == 'silver')
-                                <span class="text-gray-500 font-bold">🥈 Plata</span>
-                            @elseif ($course->pivot->medal == 'bronze')
-                                <span class="text-orange-500 font-bold">🥉 Bronce</span>
-                            @else
-                                <span class="text-gray-400 font-bold">Sin Medalla</span>
-                            @endif
-                        </td>
-                        <td class="px-4 py-2 border flex space-x-2">
-                            <a href="{{ route('courses.show', $course) }}" class="bg-blue-500 text-white px-3 py-1 rounded">Ver</a>
-                            <form action="{{ route('courses.unenroll', $course) }}" method="POST" class="inline">
+        <!-- Si un administrador está viendo el dashboard de otro usuario -->
+        <h1 class="text-3xl font-bold text-center font-mono mb-6">
+            Panel de {{ $user->name }}
+        </h1>
+    @endif
+
+    @if(!$courses->isEmpty())
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            @foreach ($courses as $course)
+                <div class="bg-gray-700 border border-gray-600 rounded-lg p-4">
+                    <h3 class="text-lg font-bold text-[var(--primary-color)]">{{ $course->title }}</h3>
+
+                    <div class="mt-2">
+                        <p class="text-gray-300">Progreso: <strong>{{ $course->pivot->progress }}%</strong></p>
+                        <div class="w-full bg-gray-600 rounded-full h-3">
+                            <div class="bg-[var(--primary-color)] h-3 rounded-full transition-all" style="width: {{ $course->pivot->progress }}%"></div>
+                        </div>
+                    </div>
+
+                    <div class="mt-2">
+                        <p class="text-gray-300">Medalla:</p>
+                        @if ($course->pivot->medal == 'gold')
+                            <span class="text-yellow-500 font-bold">🏅 Oro</span>
+                        @elseif ($course->pivot->medal == 'silver')
+                            <span class="text-gray-400 font-bold">🥈 Plata</span>
+                        @elseif ($course->pivot->medal == 'bronze')
+                            <span class="text-orange-500 font-bold">🥉 Bronce</span>
+                        @else
+                            <span class="text-gray-500 font-bold">Sin Medalla</span>
+                        @endif
+                    </div>
+
+                    <div class="mt-4 flex justify-between">
+                        <a href="{{ route('courses.chapter', [$course, 0]) }}" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition">
+                            Ver
+                        </a>
+                        
+                        @if(Auth::user()->id === $user->id)
+                            <form action="{{ route('courses.unenroll', $course) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded">Salir</button>
+                                <button type="submit" class="bg-[var(--primary-color)] text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">
+                                    Abandonar Curso
+                                </button>
                             </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+                        @endif
+                    </div>
+                </div>
+            @endforeach
+        </div>
     @endif
+
+    <div class="mt-6 flex justify-center">
+        <a href="{{ route('users.edit', $user) }}" class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition">
+            Editar Cuenta
+        </a>
+    </div>
+
 </div>
+
 @endsection
+
+
