@@ -40,7 +40,7 @@ class LoginController extends Controller
                 return redirect()->route('admin.courses.index');
             }
 
-            return redirect()->route('user.dashboard');
+            return redirect()->route('user.dashboard', $user);
         }
 
         return back()->withErrors([

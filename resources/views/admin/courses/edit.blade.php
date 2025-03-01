@@ -4,8 +4,10 @@
 
 @section('content')
 
-<div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4">Editar curso</h1>
+<div class="max-w-2xl mx-auto bg-gray-800 border-gray-700 rounded-lg shadow-lg p-6">
+    <h1 class="text-3xl font-bold text-white mb-6 text-center font-mono">
+        Editar curso
+    </h1>
 
 @livewire('admin.courses.course-edit-form', ['courseId' => $course->id])
 

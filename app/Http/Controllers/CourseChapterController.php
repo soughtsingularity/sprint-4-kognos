@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Course;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\CompleteChapterRequest;
 
 class CourseChapterController extends Controller
 {
@@ -37,20 +34,5 @@ class CourseChapterController extends Controller
         }
 
         return view('courses.chapter', compact('course','chapterIndex'));
-    }
-
-    public function completeChapter(CompleteChapterRequest $request, Course $course, $chapterIndex)
-    {
-        $user = Auth::user();
-        $totalChapters = count($course->getChapters());
-
-        $newProgress = (($chapterIndex + 1) / $totalChapters) * 100;
-
-        $user->courses()->updateExistingPivot($course->id, [
-            'progress' => $newProgress
-        ]);
-
-        return redirect()->route('courses.chapter', [$course, $chapterIndex + 1])
-            ->with('success', 'Capítulo completado');
     }
 }

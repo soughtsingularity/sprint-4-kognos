@@ -7,6 +7,7 @@ use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CourseChapterController;
+use App\Livewire\Courses\CourseProgress;
 
 Route::middleware(['web'])->group(function(){
 
@@ -23,19 +24,18 @@ Route::middleware(['web'])->group(function(){
     Route::middleware(['auth'])->group(function () {
 
         # Auth User Actions
-        Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
+        Route::get('/dashboard/{user}', [UserDashboardController::class, 'index'])->name('user.dashboard');
         Route::post('/courses/{course}/enroll', [CourseController::class, 'enroll'])->name('courses.enroll');
         Route::delete('/courses/{course}/unenroll', [CourseController::class, 'unenroll'])->name('courses.unenroll');
         Route::delete('/delete-account', [UserController::class, 'deleteOwnAccount'])->name('delete-account');
+        Route::resource('users', UserController::class);
 
         # Admin Actions
         Route::prefix('admin')->name('admin.')->group(function () {
-            Route::resource('users', UserController::class);
             Route::resource('courses', CourseController::class);
         });
 
         #Users & admin Actions
-        
-        Route::post('/courses/{course}/chapter/{chapterIndex}/complete', [CourseChapterController::class, 'completeChapter'])->name('courses.chapter.complete');
+        Route::post('/courses/{course}/chapter/{chapterIndex}/complete', [CourseProgress::class, 'completeChapter'])->name('courses.chapter.complete');
     });
 });

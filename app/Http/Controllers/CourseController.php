@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreCourseRequest;
 
 class CourseController extends Controller
@@ -18,8 +17,6 @@ class CourseController extends Controller
         return view('courses.index', compact('courses'));
     }
     
-
-    # User Actions
     public function enroll(Course $course)
     {
         $user = Auth::user();
@@ -50,7 +47,6 @@ class CourseController extends Controller
 
     }
 
-    # Admin Actions
     public function create()
     {
         return view('admin.courses.create');
@@ -66,12 +62,6 @@ class CourseController extends Controller
         ]);
 
         return redirect()->route('admin.courses.index')->with('succes', 'Curso creado correcamente');
-    }
-
-
-    public function show(Course $course)
-    {
-        //
     }
 
     public function edit(Course $course)
