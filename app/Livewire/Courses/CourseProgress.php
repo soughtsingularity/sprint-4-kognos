@@ -73,7 +73,7 @@ class CourseProgress extends Component
 
         $this->progress = $this->calculateProgress();
 
-        if($this->currentChapterIndex + 2 === count($this->chapters)){
+        if($this->currentChapterIndex + 1 === count($this->chapters)){
             $this->lastChapter = true;
         }
     
@@ -138,7 +138,7 @@ class CourseProgress extends Component
         Auth::user()->courses()->updateExistingPivot($this->course->id, ['progress' => 100]);
         $this->assignMedal();
 
-        return redirect()->route('user.dashboard', Auth::user())->with('succes', '$course->title completado');
+        return redirect()->route('user.dashboard', Auth::user())->with('success', $this->course->title .'completado');
     }
 
     private function assignMedal()

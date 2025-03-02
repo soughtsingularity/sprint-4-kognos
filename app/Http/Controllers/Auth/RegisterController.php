@@ -42,9 +42,9 @@ class RegisterController extends Controller
         Auth::login($user);
 
         if($user->role === 'admin'){
-            return redirect()->route('admin.courses.index')->with('succes', 'Registro exitoso');
+            return redirect()->route('admin.courses.index')->with('success', 'Registro exitoso');
         }
 
-        return redirect()->route('user.dashboard')->with('succes', 'Registro exitoso');
+        return redirect()->route('user.dashboard', $user)->with('success', 'Registro exitoso');
     }
 }

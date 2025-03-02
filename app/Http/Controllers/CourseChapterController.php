@@ -28,8 +28,7 @@ class CourseChapterController extends Controller
                 $requiredProgress = ($chapterIndex / $totalChapters) * 100;
                 
             if ($userProgress < $requiredProgress) {
-                return redirect()->route('courses.chapter', [$course, max(0, $chapterIndex -1)])
-                    ->with('error', 'Debes completar el capítulo antes de continuar');
+                return redirect()->route('courses.chapter', [$course, max(0, $chapterIndex -1)])->with('error', 'Debes completar el capítulo antes de continuar');
             }
         }
 

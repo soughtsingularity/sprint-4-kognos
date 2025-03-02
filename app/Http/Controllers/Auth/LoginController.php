@@ -37,14 +37,13 @@ class LoginController extends Controller
             $user = Auth::user();       
 
             if($user->role === 'admin'){
-                return redirect()->route('admin.courses.index');
+                return redirect()->route('admin.courses.index')->with('success', 'Bienvenido '. $user->name);
             }
 
-            return redirect()->route('user.dashboard', $user);
+            return redirect()->route('user.dashboard', $user)->with('success', 'Bienvenido '. $user->name);
         }
 
-        return back()->withErrors([
-            'credentials' => 'Credenciales incorrectas'])->withInput();
+        return back()->withErrors(['credentials' => 'Credenciales incorrectas'])->withInput();
     }
 
     public function logout()

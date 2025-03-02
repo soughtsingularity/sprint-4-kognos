@@ -7,7 +7,6 @@
 <div class="max-w-3xl mx-auto bg-gray-800 border border-gray-700 rounded-lg shadow-lg p-6 text-white">
 
     @if(Auth::check() && Auth::user()->id === $user->id)
-        <!-- Si el usuario autenticado está viendo su propio dashboard -->
         <h1 class="text-3xl font-bold text-center font-mono mb-6">
             Bienvenido, {{ $user->name }}
         </h1>
@@ -24,7 +23,6 @@
         @endif
 
     @else
-        <!-- Si un administrador está viendo el dashboard de otro usuario -->
         <h1 class="text-3xl font-bold text-center font-mono mb-6">
             Panel de {{ $user->name }}
         </h1>

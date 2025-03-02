@@ -77,7 +77,7 @@ class CourseCreateForm extends Component
             'content' => json_encode($validatedData['content']) 
         ]);
 
-        return redirect()->route('admin.courses.index')->with('succes', 'Curso creado con éxito');
+        return redirect()->route('admin.courses.index')->with('success', 'Curso creado con éxito');
     }
 
     public function render()

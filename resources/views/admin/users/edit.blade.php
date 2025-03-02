@@ -55,6 +55,15 @@
     </form>
 
     <div class="mt-6 flex justify-center">
+        @if(Auth::user()->role === 'admin')
+            <form action="{{ route('users.destroy', $user) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="bg-[var(--primary-color)] text-white px-6 py-3 rounded-lg hover:bg-red-700 transition">
+                    Eliminar Usuario
+                </button>
+            </form>
+        @else
         <form action="{{ route('delete-account') }}" method="POST">
             @csrf
             @method('DELETE')
@@ -62,6 +71,7 @@
                 Eliminar Cuenta
             </button>
         </form>
+        @endif
     </div>
 </div>
 

@@ -14,7 +14,7 @@ class CourseEditForm extends Component
 
     public function mount($courseId)
     {
-        $this->course = Course::findOrFail($courseId); // Buscar el curso por ID
+        $this->course = Course::findOrFail($courseId);
         $this->title = $this->course->title;
         $this->description = $this->course->description;
         $this->content = json_decode($this->course->content, true);

@@ -9,16 +9,6 @@
         Iniciar Sesión
     </h1>
 
-    @if($errors->any())
-        <div class="bg-red-600 text-white p-3 rounded-lg mb-4">
-            <ul class="list-disc pl-5">
-                @foreach($errors->all() as $error)
-                    <li class="text-sm">{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     <form method="POST" action="{{ route('login') }}" class="space-y-4">
         @csrf
         
@@ -45,10 +35,21 @@
 
         <p class="text-sm text-gray-400 text-center">
             ¿No tienes una cuenta?
-            <a href="{{ route('register') }}" class="text-[var(--primary-color)] hover:underline">
+            <a href="{{ route('register') }}" class="text-[var(--primary-color)] hover:underline text-center">
                 Regístrate aquí
             </a>
         </p>
     </form>
 </div>
+
+<script>
+    setTimeout(() => {
+        let successAlert = document.getElementById('success-alert');
+        let errorAlert = document.getElementById('error-alert');
+    
+        if(successAlert) successAlert.style.display = 'none';
+        if(errorAlert) errorAlert.style.display = 'none';
+    }, 3000);
+</script>
+
 @endsection
