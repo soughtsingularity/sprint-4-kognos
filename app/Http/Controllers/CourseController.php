@@ -27,7 +27,7 @@ class CourseController extends Controller
 
         if(!$user->courses()->where('course_id', $course->id)->exists()){
             $user->courses()->attach($course->id, ['progress' =>0 , 'medal'=> 'none']);
-            return back()->with('succes', 'Te has apuntado al curso');
+            return back()->with('success', 'Te has apuntado al curso');
         }
 
         return back()->with('error', 'Ya estás apuntado en el curso');
@@ -39,7 +39,7 @@ class CourseController extends Controller
 
         if($user->courses()->where('course_id', $course->id)->exists()){
             $user->courses()->detach($course->id);
-            return back()->with('succes', 'Te has desapuntado del curso');
+            return back()->with('success', 'Te has desapuntado del curso');
         }
 
         return back()->with('error', 'No estabas inscrito en este curso');
@@ -61,7 +61,7 @@ class CourseController extends Controller
             'content' => $request->content,
         ]);
 
-        return redirect()->route('admin.courses.index')->with('succes', 'Curso creado correcamente');
+        return redirect()->route('admin.courses.index')->with('success', 'Curso creado correcamente');
     }
 
     public function edit(Course $course)
@@ -73,12 +73,12 @@ class CourseController extends Controller
     {
         $course->update($request->all());
 
-        return redirect()->route('admin.courses.index')->with('succes', 'Curso actualizado correcamente');
+        return redirect()->route('admin.courses.index')->with('success', 'Curso actualizado correcamente');
     }
 
     public function destroy(Course $course)
     {
         $course->delete();
-        return redirect()->route('admin.courses.index')->with('succes', 'Curso eliminado correcamente');
+        return redirect()->route('admin.courses.index')->with('success', 'Curso eliminado correcamente');
     }
 }

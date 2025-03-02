@@ -8,16 +8,6 @@
             Registra tu cuenta
         </h1>
 
-        @if($errors->any())
-            <div class="bg-red-600 text-white p-3 rounded-lg mb-4">
-                <ul class="list-disc pl-5">
-                    @foreach($errors->all() as $error)
-                        <li class="text-sm">{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
         <form method="POST" action="{{route('register')}}" class="space-y-4">
             @csrf
 
@@ -48,6 +38,12 @@
                     class="w-full bg-[var(--primary-color)] text-white font-bold rounded-lg py-2.5 text-center hover:bg-red-700 transition">
                 Registrarse
             </button>
+            <p class="text-sm text-gray-400 text-center">
+                ¿Ya tienes cuenta?
+                <a href="{{ route('login') }}" class="text-[var(--primary-color)] hover:underline text-center">
+                    Login
+                </a>
+            </p>
         </form>
     </div>
 @endsection
