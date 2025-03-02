@@ -1,66 +1,86 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Descripción
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Es una aplicación que ofrece cursos o, mejor dicho, un path para aprender programación, basado en videos de Youtube (Próximamente se implementarán enlaces a webs como freecodecamp.com o a la documentación de las tecnologías implicadas)
 
-## About Laravel
+Los usuarios sin autenticar pueden navegar los capítulos de los cursos, pero no registrar su progreso
+Los usuarios autenticados pueden apuntarse a un curso y su progreeso se registra y muestra en su dashboard
+Los administradiores pueden hacer un CRUD completo de Usuarios (registrados o no) y cursos, con la única limitación de que un usuario administrador no puede hacer un actualizar o eliminar información de otro usuario administrador
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+✔️ Nivel 1
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Dissenya el model complet de la base de dades del teu projecte (MER). És important tenir clar quines són les entitats de les quals emmagatzemarem informació, així com dels seus atributs i relacions. Pots usar l'eina de la teva preferència. (MySQL Workbench, Diagrams.net, Creately...). 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Crea un nou projecte amb Laravel. Soluciona els errors que puguin aparèixer.
 
-## Learning Laravel
+Definir les rutes que tindrà el nostre projecte web. El domini ha de tenir el CRUD complet per gestionar equips i partits.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Defineix les migracions i els models de dades d'equips i partits.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Crea els controladors i els mètodes que consideris necessaris per gestionar equips i partits.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Estableix les vistes utilitzant Blade i Tailwind.css (es tindrà en compte el maquetat). Associar-les amb les rutes o els controladors corresponents.
 
-## Laravel Sponsors
+Crea els formularis necessaris per poder fer els CRUDs d'equips i partits. Hauràs de validar que la informació introduïda per l'usuari/ària sigui correcta tant a la vista com al controlador.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Has de fer servir un repositori GitHub seguint la seqüència gitflow i utilitzant pull-request.
 
-### Premium Partners
+✔️ Nivel 2
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Implementa el sistema d'autenticació amb la paqueteria de Breeze i habilita l'enviament de correu electrònic per recuperar contrasenya i de registre d'usuari/ària.
 
-## Contributing
+ Important
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Les rutes que breeze fa servir per al login/registre es troben al fitxer routes/auth.php i quant a les rutes que no requereixen autenticació a routes/web.php. Ves amb compte per això, ja que podria sobreescriure aquestes rutes i podries perdre part de la teva feina. El millor és realitzar un backup preferentment a GitHub previ a la instal·lació del paquet o instal·lar-lo des del principi en el teu projecte.
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Crea un sistema que adapti la vista de l'error 404 a nivell de projecte. Pots utilitzar la funció Resposta i la redirecció de Laravel.
 
-## Security Vulnerabilities
+✔️ Nivel 3
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Ara tractarem de donar una mica més de vida a la nostra aplicació afegint algun efecte dinàmic. Per això, necessitarem instal·lar la llibreria LiveWire.
 
-## License
+Pensa en algun ús pràctic que podries donar a aquesta llibreria dins la teva aplicació i llavors, aplica-ho.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Posa la funcionalitat que hagis creat als comentaris de l’entrega.
+
+Donat el que hem vist al tema 9 d’aquest Sprint, implementa la capa de Servei en la teva aplicació.
+
+💻 Tecnologías Utilizadas
+PHP: Lenguaje de programación utilizado para desarrollar la aplicación.
+Tailwind CSS: Framework CSS utilizado para el diseño responsivo de las vistas.
+MySQL: Base de datos para almacenar usuarios y tareas.
+Laravel: Framework utilizado para el proyecto
+
+🔑 Requisitos
+PHP 7.4+
+Laravel Framework 11.43.1
+MySQL o MariaDB.
+Tailwind CSS (para estilos en la interfaz).
+Composer (Para gestionar dependencias de PHP instaladas en el proyecto).
+Dependecia instalada: livewire/livewire": "^3.5"
+
+☕ Instalación
+Clona este repositorio en tu máquina local.
+git clone https://github.com/tu_usuario/nombre_del_repositorio.git
+
+Accede a la carpeta del proyecto.
+cd nombre_del_repositorio
+
+Ejecuta las migraciones: 
+
+``php artisan migrate``
+
+(Debes crear una base de datos en Mysql / Mariadb llamada 'kognos' o modificar el archivo .env del proyecto para que la aplicación se comunique correctamente con tu base de datos)
+
+Puebla la base de datos mediante los seeders implementados en la aplicación:
+
+``php artisan db:seed``
+
+
+Se creará un curso llamado Desarrollo web con PHP y Laravel y un usuario de nombre ``socketserious``, email ``socketserious@gmail.com ``y contrasña ``12345678`` que tandrá rol de administrador
+
+Recuerda, en la raíz del proyecto, ejecutar el comando composer install para que los paquetes utilizados en el proyecto, y listandos en el archivo composer.json, sean instalados.
+
+⏩ Ejecución
+
+Ejecuta ``php artisan serve``y accede, por defecto, a ``127.0.0.1:8000``
