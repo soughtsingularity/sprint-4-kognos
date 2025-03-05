@@ -84,21 +84,6 @@ class CourseProgress extends Component
     
     public function nextChapter()
     {
-        if(Auth::user()->role === 'admin'){
-            if($this->currentChapterIndex < count($this->chapters) - 1){
-                $this->currentChapterIndex++;
-            }
-        }
-
-        if (!Auth::check()) {
-            return;
-        }
-
-        if(!in_array($this->currentChapterIndex, $this->completedChapters))
-        {
-            return;
-        }
-    
         if ($this->currentChapterIndex < count($this->chapters) - 1) {
             $this->currentChapterIndex++;
         }
