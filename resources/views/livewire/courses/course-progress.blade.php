@@ -22,7 +22,7 @@
                 @endforeach
             @endif
 
-            @if(Auth::check() && Auth::user()->role === 'user' && !$this->lastChapter && !isset($completedChapters[$currentChapterIndex]))
+            @if(Auth::check() && Auth::user()->role === 'user' && !$this->lastChapter && !isset($completedChapters[$currentChapterIndex]) && Auth::user()->courses->contains($course))
             <div class="mt-4">
                 <button type="button"
                         wire:click="markChapterComplete"
@@ -50,7 +50,7 @@
                     class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-500 transition">
                 Siguiente Capítulo
             </button>
-        @elseif(Auth::check() && Auth::user()->role === 'user' && $this->lastChapter)
+        @elseif(Auth::check() && Auth::user()->role === 'user' && $this->lastChapter && Auth::user()->courses->contains($course))
             <button type="button"
                     wire:click="completeCourse"
                     class="text-white bg-[var(--primary-color)] px-4 py-2 rounded-lg hover:bg-red-700 transition">
