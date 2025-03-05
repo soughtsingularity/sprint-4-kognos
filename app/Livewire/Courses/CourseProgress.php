@@ -5,7 +5,6 @@ namespace App\Livewire\Courses;
 use Livewire\Component;
 use App\Models\Course;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\CompleteChapterRequest;
 
 class CourseProgress extends Component
 {
@@ -63,7 +62,7 @@ class CourseProgress extends Component
     
     public function markChapterComplete()
     {
-        if(!Auth::check()){
+        if(!Auth::check() && Auth::user()->courses->contains($this->course)){
             return;
         }
 
@@ -97,8 +96,9 @@ class CourseProgress extends Component
         }
     }
 
-    public function completeChapter(CompleteChapterRequest $request, Course $course, $chapterIndex)
+    public function completeChapter(Course $course, $chapterIndex)
     {
+
         $user = Auth::user();
         $totalChapters = count($course->getChapters());
 
