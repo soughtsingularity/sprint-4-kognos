@@ -60,11 +60,21 @@ Composer (Para gestionar dependencias de PHP instaladas en el proyecto).
 Dependecia instalada: livewire/livewire": "^3.5"
 
 ☕ Instalación
+
 Clona este repositorio en tu máquina local.
 git clone https://github.com/tu_usuario/nombre_del_repositorio.git
 
 Accede a la carpeta del proyecto.
 cd nombre_del_repositorio
+
+Instala dependencias de composer:
+``composer install``
+
+Crea el archivo .env a partir de example.env
+``cp .example.env .env``
+
+Genera las llaves secretas
+``php artisan key:generate``
 
 Ejecuta las migraciones: 
 
